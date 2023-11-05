@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/styles.css">
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine">   
+    <title>YT analysis</title>
+</head>
+<body>
+    <div id="background-animation">
+        <canvas id="c"></canvas>
+    </div>
+    <div id="content">
+        <!-- Content goes here -->
+        <h1 id="Nara-head">Youtube Analyzer</h1>
+        <section class="webdesigntuts-workshop">
+            <form action="{% url 'form_submit' %}" method="post">
+                {% csrf_token %}
+                <input type="search" name="youtube_url" placeholder="Paste Youtube URL" required>
+                <input type="search" name="keyword" placeholder="Keyword" required>
+                <button type="submit">Search</button>
+            </form>            
+        </section>
+
+    </div>
+    <script src="../static/script.js"></script>
+</body>
+</html>

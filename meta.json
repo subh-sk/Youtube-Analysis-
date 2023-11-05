@@ -1,0 +1,8 @@
+{
+    "project_name": "YT_analysise",
+    "description": "Youtube sentimental analysis project",
+    "version": "1.0",
+    "author": "Sourabh Singh",
+    "created_at": "2023-11-06",
+    "license": "MIT"
+}

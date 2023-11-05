@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/styles.css">
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine">
+    <title>YT analysis</title>
+
+</head>
+
+<body>
+    <div id="background-animation">
+        <canvas id="c"></canvas>
+    </div>
+    <div id="content">
+        <!-- Content goes here -->
+        <h1 id="Nara-head">Youtube Analyzer</h1>
+        <section class="webdesigntuts-workshop">
+            <form action="{% url 'form_submit' %}" method="post">
+                {% csrf_token %}
+                <input type="search" name="youtube_url" placeholder="Paste Youtube URL" required>
+                <input type="search" name="keyword" placeholder="Keyword" required>
+                <button type="submit">Search</button>
+            </form>
+
+
+
+
+
+            <ul class="my-list">
+                {% if fetch == 404 %}
+                <li class="no-match"
+                    style="background-color: rgb(48, 47, 47); padding: 5px; font-size: 23px; border-radius: 10px;font-family: 'DIN', sans-serif;">
+                    Video Not Found Please Check The Video URL</li>
+                {% elif fetch %}
+                    <h1 style="color: rgb(11, 213, 213);font-family: 'DIN', sans-serif;font-weight: bold;">Comments matching the keyword:</h1>
+                    {% for comment in fetch %}
+                    <li
+                        style="background-color: rgb(48, 47, 47); padding: 5px; margin: 5px; font-size: 23px; border-radius: 10px; font-family: 'DIN', sans-serif;">
+                        {{ comment }}</li>
+                    {% endfor %}
+                {% else %}
+                    {% if fetch == 0 %}
+                    <li class="no-match"
+                        style="background-color: rgb(48, 47, 47); padding: 5px; font-size: 23px; border-radius: 10px;font-family: 'DIN', sans-serif;">
+                        Check Your URL and Try Again...</li>
+                    {% else %}
+                    <li class="no-match" style="background-color: rgb(48, 47, 47); padding: 5px; font-size: 23px; border-radius: 10px;font-family: 'DIN', sans-serif;">No match found</li>
+                    {% endif %}
+                {% endif %}
+            </ul>
+
+
+        </section>
+
+    </div>
+    <script src="../static/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const scrollContainer = document.querySelector('.my-list');
+            const ul = scrollContainer.querySelector('ul');
+
+            if (ul.scrollHeight > ul.clientHeight) {
+                ul.style.overflowY = 'scroll';
+            } else {
+                ul.style.overflowY = 'hidden';
+            }
+        });
+    </script>
+    <!-- <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.querySelector('form');
+            const commentsContainer = document.getElementById('comments-container');
+    
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();
+                const formData = new FormData(form);
+    
+                fetch("{% url 'form_submit' %}", {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-CSRFToken': formData.get('csrfmiddlewaretoken')
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Clear existing comments
+                    commentsContainer.innerHTML = '';
+    
+                    // Add comments from the response
+                    data.comments.forEach(comment => {
+                        const li = document.createElement('li');
+                        li.textContent = comment;
+                        commentsContainer.appendChild(li);
+                    });
+                });
+            });
+        });
+    </script> -->
+
+</body>
+
+</html>
