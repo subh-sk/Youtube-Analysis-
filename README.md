@@ -13,7 +13,8 @@
 
 
 >how project looks like
->
+<img src="ui.png">
+
 <video width="320" height="240" controls>
   <source src="./PROJECT_SAMPLE.mp4" type="video/mp4">
   Your browser does not support the video tag.
