@@ -17,3 +17,4 @@
   <source src="PROJECT_SAMPLE.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
+[Download PROJECT_SAMPLE.mp4](./PROJECT_SAMPLE.mp4)
